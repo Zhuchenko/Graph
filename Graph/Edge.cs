@@ -1,17 +1,17 @@
-﻿namespace Graph
+﻿using System;
+
+namespace Graph
 {
-    class Edge
+    class Edge<T> where T: IComparable<T>
     {
-        public string Starting { get; }
-        public string Final { get; }
-        public int Index { get; }
+        public Vertex<T> Starting { get; }
+        public Vertex<T> Final { get; }
         public string Name { get; }
 
-        public Edge(string starting, string final, int index, string name)
+        public Edge(Vertex<T> starting, Vertex<T> final, string name)
         {
             Starting = starting;
             Final = final;
-            Index = index;
             Name = name;
         }
 
