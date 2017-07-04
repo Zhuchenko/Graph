@@ -4,16 +4,16 @@ namespace Graph
 {
     class Vertex<T>: IComparable<Vertex<T>> where T: IComparable<T>
     {
-        public string Name { get; set; }
+        public T Key { get; set; }
 
-        public Vertex(string name)
+        public Vertex(T key)
         {
-            Name = name;
+            Key = key;
         }
 
         public int CompareTo(Vertex<T> other)
         {
-            return Name.CompareTo(other.Name);
+            return Key.CompareTo(other.Key);
         }
     }
 }
