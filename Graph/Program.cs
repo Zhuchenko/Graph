@@ -49,7 +49,7 @@ namespace Graph
                 for (int i = 0; i < n; i++)
                 {
                     string[] param = sr.ReadLine().Split(del, StringSplitOptions.RemoveEmptyEntries);
-                    returnValue.Add(new Edge<string>(new Vertex<string>(param[0]), new Vertex<string>(param[1]), param[2]));
+                    returnValue.Add(new Edge<string>(new Vertex<string>(param[0]), new Vertex<string>(param[1]), param[2], int.Parse(param[3])));
                 }
             }
             return returnValue;
@@ -79,16 +79,11 @@ namespace Graph
             return new Options<string>(plus, minus); ;
         }
 
-        public static void Print(IEnumerable<IEnumerable<Edge<string>>> result)
+        public static void Print(IEnumerable<Edge<string>> result)
         {
-            for (int i = 0; i < result.Count(); i++)
-            {
-                Console.Write("Path #" + (i + 1) + ": ");
-                var res_i = result.ToList()[i];
-                foreach (Edge<string> item in res_i)
-                    Console.Write("  " + item);
-                Console.WriteLine();
-            }
+            var output = result.ToList();
+            foreach (Edge<string> item in output)
+                Console.Write("  " + item);
 
             if (result.Count() == 0)
                 Console.WriteLine("No path");
