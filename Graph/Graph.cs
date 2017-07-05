@@ -76,12 +76,13 @@ namespace Graph
                                 flag = false;
                                 break;
                             }
-                        foreach (int check in checkForPlusForVertexes)
-                            if (check == 0)
-                            {
-                                flag = false;
-                                break;
-                            }
+                        if (flag)
+                            foreach (int check in checkForPlusForVertexes)
+                                if (check == 0)
+                                {
+                                    flag = false;
+                                    break;
+                                }
 
                         if (flag) returnValue.Add((from t in edges select t.Key).ToList());
 
