@@ -2,7 +2,7 @@
 
 namespace Graph
 {
-    class Vertex<T>: IComparable<Vertex<T>> where T: IComparable<T>
+    public class Vertex<T>: IComparable<Vertex<T>> where T: IComparable<T>
     {
         public T Key { get; set; }
 

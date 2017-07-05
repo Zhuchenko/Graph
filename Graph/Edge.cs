@@ -2,7 +2,7 @@
 
 namespace Graph
 {
-    class Edge<T> where T: IComparable<T>
+    public class Edge<T> where T: IComparable<T>
     {
         public Vertex<T> Starting { get; }
         public Vertex<T> Final { get; }

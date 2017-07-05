@@ -1,6 +1,6 @@
 ﻿namespace Graph
 {
-    class Pair<TKey, TValue>
+    public class Pair<TKey, TValue>
     {
         public TKey Key { get; }
         public TValue Value { get; set; }

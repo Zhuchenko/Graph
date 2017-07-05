@@ -13,14 +13,14 @@ namespace Graph
             string pathToFile = Console.ReadLine();
             var graph = new Graph<string>(Read(pathToFile));
 
-            Console.Write("S = ");
-            var S = new Vertex<string>(Console.ReadLine());
-            Console.Write("F = ");
-            var F = new Vertex<string>(Console.ReadLine());
+            Console.Write("Starting = ");
+            var Starting = new Vertex<string>(Console.ReadLine());
+            Console.Write("Final = ");
+            var Final = new Vertex<string>(Console.ReadLine());
 
-            if (!Contains(graph, S) || !Contains(graph, F))
+            if (!Contains(graph, Starting) || !Contains(graph, Final))
             {
-                Console.WriteLine("Graph must contain S and F");
+                Console.WriteLine("Graph must contain Starting and Final");
                 Console.ReadKey();
                 return;
             }
@@ -30,10 +30,10 @@ namespace Graph
             Console.Write("Input searching options for vertexes: ");
             string optionsForVertexes = Console.ReadLine();
 
-            var dictForEdges = DoDict(optionsForEdges);
-            var dictForVertexes = DoDict(optionsForVertexes);
+            var optForEdges = DoOptions(optionsForEdges);
+            var optForVertexes = DoOptions(optionsForVertexes);
 
-            var result = graph.GetPathesSFWithOptions( S, F, dictForEdges, dictForVertexes);
+            var result = graph.GetPathesWithOptions(Starting, Final, optForEdges, optForVertexes);
             Print(result);
 
             Console.ReadKey();
@@ -64,18 +64,19 @@ namespace Graph
             return false;
         }
 
-        public static Dictionary<string, char> DoDict(string op)
+        public static Options<string> DoOptions(string input)
         {
-            var options = op.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
-            var dict = new Dictionary<string, char>();
+            var options = input.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var plus = new List<string>();
+            var minus = new List<string>();
             foreach (var item in options)
             {
                 if (item[0] == '-')
-                    dict.Add(item.TrimStart('-'), '-');
+                    minus.Add(item.Substring(1));
                 if (item[0] == '+')
-                    dict.Add(item.TrimStart('+'), '+');
+                    plus.Add(item.Substring(1));
             }
-            return dict;
+            return new Options<string>(plus, minus); ;
         }
 
         public static void Print(IEnumerable<IEnumerable<Edge<string>>> result)
