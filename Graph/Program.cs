@@ -30,11 +30,11 @@ namespace Graph
             Console.Write("Input searching options for vertexes: ");
             string optionsForVertexes = Console.ReadLine();
 
-            var optForEdges = DoOptions(optionsForEdges);
-            var optForVertexes = DoOptions(optionsForVertexes);
+            var options = DoAllOptions(optionsForEdges, optionsForVertexes);
 
-            var result = graph.GetPathesWithOptions(Starting, Final, optForEdges, optForVertexes);
-            Print(result);
+            var res = graph.FindBestPathWithOptions(Starting, Final, options.Item1, options.Item2);
+
+            Print(res);
 
             Console.ReadKey();
         }
@@ -64,19 +64,27 @@ namespace Graph
             return false;
         }
 
-        public static Options<string> DoOptions(string input)
+        public static Tuple<Options<string>, Options<string>> DoAllOptions(string forEdges, string forVertexes)
+        {
+            var edge = DoOptionsForOne(forEdges);
+            var vertex = DoOptionsForOne(forVertexes);
+            return Tuple.Create(new Options<string>(edge.Item1, vertex.Item1), 
+                new Options<string>(edge.Item2, vertex.Item2)); 
+        }
+
+        public static Tuple<List<string>, List<string>> DoOptionsForOne(string input)
         {
             var options = input.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
-            var plus = new List<string>();
-            var minus = new List<string>();
+            var include = new List<string>();
+            var exclude = new List<string>();
             foreach (var item in options)
             {
-                if (item[0] == '-')
-                    minus.Add(item.Substring(1));
                 if (item[0] == '+')
-                    plus.Add(item.Substring(1));
+                    include.Add(item.Substring(1));
+                if (item[0] == '-')
+                    exclude.Add(item.Substring(1));
             }
-            return new Options<string>(plus, minus); ;
+            return Tuple.Create(include, exclude);
         }
 
         public static void Print(IEnumerable<Edge<string>> result)
@@ -87,6 +95,8 @@ namespace Graph
 
             if (result.Count() == 0)
                 Console.WriteLine("No path");
+
+            Console.WriteLine();
         }
     }
 }

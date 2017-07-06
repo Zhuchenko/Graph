@@ -1,0 +1,9 @@
+8
+A, B, AB0, 3
+A, B, AB1, 1
+A, C, AC, 10
+A, D, AD, 4
+B, A, BA, 1
+B, C, BC, 5
+D, C, DC, 3
+D, D, DD, 1

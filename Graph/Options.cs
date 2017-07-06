@@ -6,15 +6,15 @@ namespace Graph
 {
     public class Options<T>
     {
-        public T[] Include { get; set; }
-        public T[] Exclude { get; set; }
+        public string[] Edges { get; set; }
+        public T[] Vertexes { get; set; }
 
-        public Options(IEnumerable<T> include, IEnumerable<T> minus)
+        public Options(IEnumerable<string> e, IEnumerable<T> v)
         {
-            Include = new T[include.Count()];
-            Array.Copy(include.ToArray(), Include, include.Count());
-            Exclude = new T[minus.Count()];
-            Array.Copy(minus.ToArray(), Exclude, minus.Count());
+            Edges = new string[e.Count()];
+            Array.Copy(e.ToArray(), Edges, e.Count());
+            Vertexes = new T[v.Count()];
+            Array.Copy(v.ToArray(), Vertexes, v.Count());
         }
     }
 }
