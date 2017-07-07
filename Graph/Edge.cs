@@ -4,15 +4,15 @@ namespace Graph
 {
     public class Edge<T>: IComparable<Edge<T>> where T: IComparable<T>
     {
-        public Vertex<T> Starting { get; }
-        public Vertex<T> Final { get; }
+        public Vertex<T> Start { get; }
+        public Vertex<T> Finish { get; }
         public string Name { get; }
         public int Weight { get; }
 
-        public Edge(Vertex<T> starting, Vertex<T> final, string name, int weight)
+        public Edge(T start, T finish, string name, int weight)
         {
-            Starting = starting;
-            Final = final;
+            Start = new Vertex<T> (start);
+            Finish = new Vertex<T> (finish);
             Name = name;
             Weight = weight;
         }

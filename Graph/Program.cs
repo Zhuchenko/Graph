@@ -14,27 +14,23 @@ namespace Graph
             var graph = new Graph<string>(Read(pathToFile));
 
             Console.Write("Starting = ");
-            var Starting = new Vertex<string>(Console.ReadLine());
+            var starting = Console.ReadLine();
             Console.Write("Final = ");
-            var Final = new Vertex<string>(Console.ReadLine());
-
-            if (!Contains(graph, Starting) || !Contains(graph, Final))
-            {
-                Console.WriteLine("Graph must contain Starting and Final");
-                Console.ReadKey();
-                return;
-            }
+            var final = Console.ReadLine();
 
             Console.Write("Input searching options for edges: ");
             string optionsForEdges = Console.ReadLine();
             Console.Write("Input searching options for vertexes: ");
             string optionsForVertexes = Console.ReadLine();
 
-            var options = DoAllOptions(optionsForEdges, optionsForVertexes);
+            var option = DoOptions(optionsForEdges, optionsForVertexes);
+            var bestPathFinder = new BestPathFinder<string>();
+            var allPathesFinder = new AllPathesFinder<string>();
 
-            var res = graph.FindBestPathWithOptions(Starting, Final, options.Item1, options.Item2);
+            foreach (var path in allPathesFinder.GirthOfGraph(graph, starting, final, option))
+                Print(path);
 
-            Print(res);
+            Print(bestPathFinder.Find(graph, starting, final, option));
 
             Console.ReadKey();
         }
@@ -49,27 +45,17 @@ namespace Graph
                 for (int i = 0; i < n; i++)
                 {
                     string[] param = sr.ReadLine().Split(del, StringSplitOptions.RemoveEmptyEntries);
-                    returnValue.Add(new Edge<string>(new Vertex<string>(param[0]), new Vertex<string>(param[1]), param[2], int.Parse(param[3])));
+                    returnValue.Add(new Edge<string>(param[0], param[1], param[2], int.Parse(param[3])));
                 }
             }
             return returnValue;
         }
 
-        public static bool Contains(Graph<string> graph, Vertex<string> ver)
-        {
-            foreach (var item in graph.Edges)
-                if (item.Starting.CompareTo(ver) == 0 || item.Final.CompareTo(ver) == 0)
-                    return true;
-            
-            return false;
-        }
-
-        public static Tuple<Options<string>, Options<string>> DoAllOptions(string forEdges, string forVertexes)
+        public static IncludeExclude<string> DoOptions(string forEdges, string forVertexes)
         {
             var edge = DoOptionsForOne(forEdges);
             var vertex = DoOptionsForOne(forVertexes);
-            return Tuple.Create(new Options<string>(edge.Item1, vertex.Item1), 
-                new Options<string>(edge.Item2, vertex.Item2)); 
+            return new IncludeExclude<string>(edge.Item1, vertex.Item1, edge.Item2, vertex.Item2);
         }
 
         public static Tuple<List<string>, List<string>> DoOptionsForOne(string input)

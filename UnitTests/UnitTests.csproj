@@ -48,9 +48,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllPathesFinderTest.cs" />
+    <Compile Include="BestPathFinderTest.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="CheckerIncludeTest.cs" />
-    <Compile Include="GraphTest.cs" />
+    <Compile Include="IncludeExcludeTest.cs" />
+    <Compile Include="MaxLengthTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

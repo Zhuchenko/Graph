@@ -6,16 +6,22 @@ namespace UnitTests
 {
     public static class Builder
     {
-        public static Graph<string> Build(List<Tuple<string, string, int>> param)
+        public static Edge<string> BuildEdge(string start, string finish, int weight)
+        {
+            return new Edge<string>(start, finish, start + finish, weight);
+        }
+
+        public static List<Edge<string>> BuildListOfEdge(List<Tuple<string, string, int>> param)
         {
             var edges = new List<Edge<string>>();
             foreach(var item in param)
-            {
-                edges.Add(new Edge<string>(new Vertex<string>(item.Item1), 
-                    new Vertex<string>(item.Item2), 
-                    item.Item1 + item.Item2, item.Item3));
-            }
-            return new Graph<string>(edges);
+                edges.Add(BuildEdge(item.Item1, item.Item2, item.Item3));
+            return edges;
+        }
+
+        public static Graph<string> BuildGraph(List<Tuple<string, string, int>> param)
+        {
+            return new Graph<string>(BuildListOfEdge(param));
         }
     }
 }

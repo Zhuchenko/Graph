@@ -42,10 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckerInclude.cs" />
+    <Compile Include="AllPathesFinder.cs" />
+    <Compile Include="BestPathFinder.cs" />
+    <Compile Include="Option\CheckerInclude.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
-    <Compile Include="Options.cs" />
+    <Compile Include="Option\IncludeExclude.cs" />
+    <Compile Include="Option\IOption.cs" />
+    <Compile Include="Option\MaxLength.cs" />
+    <Compile Include="Option\Option.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
