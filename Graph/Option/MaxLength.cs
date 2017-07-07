@@ -6,11 +6,11 @@ namespace Graph.Option
 {
     public class MaxLength<T> : IOption<T> where T : IComparable<T>
     {
-        int _sup;
+        int _supremum;
 
-        public MaxLength(int sup)
+        public MaxLength(int supremum)
         {
-            _sup = sup;
+            _supremum = supremum;
         }
 
         public bool CheckEdge(Edge<T> edge)
@@ -20,7 +20,7 @@ namespace Graph.Option
 
         public bool CheckPath(IEnumerable<Edge<T>> path)
         {
-            return path.Count() <= _sup;
+            return path.Count() <= _supremum;
         }
     }
 }
