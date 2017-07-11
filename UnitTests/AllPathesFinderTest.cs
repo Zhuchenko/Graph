@@ -11,7 +11,7 @@ namespace UnitTests
     public class AllPathesFinderTest
     {
         [TestMethod]
-        public void GirthOfGraphTestRoundTrip()
+        public void FindAllPathesTestRoundTrip()
         {
             var graph = Builder.BuildGraph(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 1), Tuple.Create("A", "D", 1),
@@ -20,12 +20,13 @@ namespace UnitTests
             var option =  new OptionComposite<string>(new IOption<string>[0]);
             
             var expected = new string[][] { 
-                new string[] { "AB", "BA", "AC" }, new string[] { "AB", "BA", "AD", "DC" },
-                new string[] { "AB", "BC" }, new string[] { "AC" }, new string[] { "AD", "DC" }};
+                new string[] { "AC" }, new string[] { "AB", "BC" }, new string[] { "AD", "DC" },
+                new string[] { "AB", "BA", "AC" }, new string[] { "AB", "BA", "AD", "DC" }
+            };
 
             var actaul = new List<string[]>();
             var finder = new AllPathesFinder<string>();
-            foreach (var path in finder.GirthOfGraph(graph, "A", "C", option))
+            foreach (var path in finder.Find(graph, "A", "C", option))
                 actaul.Add((from edge in path select edge.Name).ToArray());
 
             Assert.AreEqual(expected.Length, actaul.Count);
@@ -38,7 +39,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void GirthOfGraphTestNotRoundTrip()
+        public void FindAllPathesTestNotRoundTrip()
         {
             var graph = Builder.BuildGraph(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 1), Tuple.Create("A", "D", 1),
@@ -55,8 +56,8 @@ namespace UnitTests
             var finder = new AllPathesFinder<string>();
 
             var expected = new string[] { "AB", "BA", "AC" };
-            ;
-            foreach (var path in finder.GirthOfGraph(graph, "A", "C", option))
+            
+            foreach (var path in finder.Find(graph, "A", "C", option))
             {
                 var actual = (from edge in path select edge.Name).ToArray();
                 CollectionAssert.AreEqual(expected, actual);
@@ -64,7 +65,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void GirthOfGraphTestNoOneTrip()
+        public void FindAllPathesTestNoOneTrip()
         {
             var graph = Builder.BuildGraph(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 1), Tuple.Create("A", "D", 1),
@@ -79,7 +80,7 @@ namespace UnitTests
             var option = new OptionComposite<string>(new IOption<string>[] { incexc, new MaxLength<string>(1) });
 
             var finder = new AllPathesFinder<string>();
-            var actual = finder.GirthOfGraph(graph, "A", "C", option);
+            var actual = finder.Find(graph, "A", "C", option);
 
             Assert.AreEqual(0, actual.Count());
              

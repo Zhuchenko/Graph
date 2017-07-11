@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Graph.Structures;
+using System;
 using System.Collections.Generic;
 
 namespace Graph
@@ -24,7 +25,7 @@ namespace Graph
             return true;
         }
 
-        public bool CheckPath(IEnumerable<Edge<T>> path)
+        public bool CheckPath(Path<T> path)
         {
             foreach (var item in _options)
             {

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Graph.Structures;
+using System;
 
 namespace Graph
 {
@@ -7,6 +7,6 @@ namespace Graph
         where T: IComparable<T>
     {
         bool CheckEdge(Edge<T> edge);
-        bool CheckPath(IEnumerable<Edge<T>> path);
+        bool CheckPath(Path<T> path);
     }
 }

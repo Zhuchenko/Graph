@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Graph.Structures;
+using System;
 using System.Linq;
 
 namespace Graph.Option
@@ -19,7 +19,7 @@ namespace Graph.Option
             return true;
         }
 
-        public bool CheckPath(IEnumerable<Edge<T>> path)
+        public bool CheckPath(Path<T> path)
         {
             return path.Count() <= _supremum;
         }

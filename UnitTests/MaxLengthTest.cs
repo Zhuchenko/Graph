@@ -12,7 +12,7 @@ namespace UnitTests
         [TestMethod]
         public void CheckPathTestTrue()
         {
-            var path = Builder.BuildListOfEdge(new List<Tuple<string, string, int>>{
+            var path = Builder.BuildPath(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 1), Tuple.Create("A", "D", 1),
                 Tuple.Create("B", "A", 1), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) });
             var maxLen = new MaxLength<string>(6);
@@ -22,7 +22,7 @@ namespace UnitTests
         [TestMethod]
         public void CheckPathTestFalse()
         {
-            var path = Builder.BuildListOfEdge(new List<Tuple<string, string, int>>{
+            var path = Builder.BuildPath(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 1), Tuple.Create("A", "D", 1),
                 Tuple.Create("B", "A", 1), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) });
             var maxLen = new MaxLength<string>(3);

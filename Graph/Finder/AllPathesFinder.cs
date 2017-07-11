@@ -21,7 +21,8 @@ namespace Graph
                 Path<T> currentPath = queue.Dequeue();
 
                 var isCompleted = AreEqual(currentPath.Last().Finish.Key, final);
-                if (isCompleted)
+                var isChecked = option.CheckPath(currentPath);
+                if (isCompleted && isChecked)
                 {
                     yield return currentPath;
                     continue;

@@ -30,7 +30,7 @@ namespace UnitTests
         public void CheckPathTestTrue()
         {
             var incexc = Create();
-            var path = Builder.BuildListOfEdge(new List<Tuple<string, string, int>> {
+            var path = Builder.BuildPath(new List<Tuple<string, string, int>> {
                 Tuple.Create("A", "B", 1), Tuple.Create("B", "E", 1), Tuple.Create("E", "C", 1)});
             incexc.CheckPath(path);
         }
@@ -39,7 +39,7 @@ namespace UnitTests
         public void CheckPathTestFalse1()
         {
             var incexc = Create();
-            var path = Builder.BuildListOfEdge(new List<Tuple<string, string, int>> {
+            var path = Builder.BuildPath(new List<Tuple<string, string, int>> {
                 Tuple.Create("A", "B", 1), Tuple.Create("B", "C", 1)});
             incexc.CheckPath(path);
         }
@@ -48,7 +48,7 @@ namespace UnitTests
         public void CheckPathTestFalse2()
         {
             var incexc = Create();
-            var path = Builder.BuildListOfEdge(new List<Tuple<string, string, int>> {
+            var path = Builder.BuildPath(new List<Tuple<string, string, int>> {
                 Tuple.Create("A", "D", 1), Tuple.Create("D", "B", 1), Tuple.Create("B", "E", 1), Tuple.Create("E", "C", 1)});
             incexc.CheckPath(path);
         }

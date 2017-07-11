@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Graph.Structures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,7 +39,7 @@ namespace Graph
                 || CheckVertex(edge.Finish.Key));
         }
 
-        public bool CheckPath(IEnumerable<Edge<T>> path)
+        public bool CheckPath(Path<T> path)
         {
             checker = new CheckerInclude<T>(includeEdges, includeVertexes);
             checker.CheckVertex(path.First().Start.Key);

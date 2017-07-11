@@ -13,9 +13,9 @@ namespace UnitTests
         [TestMethod]
         public void FindTestBest()
         {
-            var graph = new Graph<string>(Builder.BuildListOfEdge(new List<Tuple<string, string, int>>{
+            var graph = Builder.BuildGraph(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 7), Tuple.Create("A", "D", 1),
-                Tuple.Create("B", "A", 2), Tuple.Create("B", "C", 4), Tuple.Create("D", "C", 1) }));
+                Tuple.Create("B", "A", 2), Tuple.Create("B", "C", 4), Tuple.Create("D", "C", 1) });
 
 
             var option = new OptionComposite<string>(new IOption<string>[0]);
@@ -23,7 +23,7 @@ namespace UnitTests
 
             var expected = new string[] { "AD", "DC" };
 
-            var path = finder.Find(graph, "A", "C", option);
+            var path = finder.Find(graph, "A", "C", option).First();
             var actual = (from edge in path select edge.Name).ToArray();
 
             CollectionAssert.AreEqual(expected, actual);
@@ -32,9 +32,9 @@ namespace UnitTests
         [TestMethod]
         public void FindTestBestShortest()
         {
-            var graph = new Graph<string>(Builder.BuildListOfEdge(new List<Tuple<string, string, int>>{
+            var graph = Builder.BuildGraph(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 2), Tuple.Create("A", "D", 1),
-                Tuple.Create("B", "A", 2), Tuple.Create("B", "C", 4), Tuple.Create("D", "C", 1) }));
+                Tuple.Create("B", "A", 2), Tuple.Create("B", "C", 4), Tuple.Create("D", "C", 1) });
 
 
             var option = new OptionComposite<string>(new IOption<string>[0]);
@@ -43,7 +43,7 @@ namespace UnitTests
 
             var expected = new string[] { "AC" };
 
-            var path = finder.Find(graph, "A", "C", option);
+            var path = finder.Find(graph, "A", "C", option).First();
             var actual = (from edge in path select edge.Name).ToArray();
 
             CollectionAssert.AreEqual(expected, actual);
@@ -52,9 +52,9 @@ namespace UnitTests
         [TestMethod]
         public void FindTestBestShortestFirst()
         {
-            var graph = new Graph<string>(Builder.BuildListOfEdge(new List<Tuple<string, string, int>>{
+            var graph = Builder.BuildGraph(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 3), Tuple.Create("A", "D", 1),
-                Tuple.Create("B", "A", 3), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) }));
+                Tuple.Create("B", "A", 3), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) });
             
             var option = new OptionComposite<string>(new IOption<string>[0]);
 
@@ -62,7 +62,7 @@ namespace UnitTests
 
             var expected = new string[] { "AB", "BC" };
 
-            var path = finder.Find(graph, "A", "C", option);
+            var path = finder.Find(graph, "A", "C", option).First();
             var actual = (from edge in path select edge.Name).ToArray();
 
             CollectionAssert.AreEqual(expected, actual);
@@ -71,9 +71,9 @@ namespace UnitTests
         [TestMethod]
         public void FindTestWithOptions()
         {
-            var graph = new Graph<string>(Builder.BuildListOfEdge(new List<Tuple<string, string, int>>{
+            var graph = Builder.BuildGraph(new List<Tuple<string, string, int>>{
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 3), Tuple.Create("A", "D", 1),
-                Tuple.Create("B", "A", 3), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) }));
+                Tuple.Create("B", "A", 3), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) });
 
             var incEdges = new List<string>();
             var incVertexes = new List<string>();
@@ -86,7 +86,7 @@ namespace UnitTests
 
             var expected = new string[] { "AB", "BC" };
 
-            var path = finder.Find(graph, "A", "C", option);
+            var path = finder.Find(graph, "A", "C", option).First();
             var actual = (from edge in path select edge.Name).ToArray();
 
             CollectionAssert.AreEqual(expected, actual);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Graph;
+using Graph.Structures;
 
 namespace UnitTests
 {
@@ -11,12 +12,17 @@ namespace UnitTests
             return new Edge<string>(start, finish, start + finish, weight);
         }
 
-        public static List<Edge<string>> BuildListOfEdge(List<Tuple<string, string, int>> param)
+        private static List<Edge<string>> BuildListOfEdge(List<Tuple<string, string, int>> param)
         {
             var edges = new List<Edge<string>>();
             foreach(var item in param)
                 edges.Add(BuildEdge(item.Item1, item.Item2, item.Item3));
             return edges;
+        }
+
+        public static Path<string> BuildPath(List<Tuple<string, string, int>> param)
+        {
+            return new Path<string>(BuildListOfEdge(param));
         }
 
         public static Graph<string> BuildGraph(List<Tuple<string, string, int>> param)
