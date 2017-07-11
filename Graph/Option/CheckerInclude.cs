@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Graph
 {
+    [DataContract]
     public class CheckerInclude<T> where T: IComparable<T>
     {
+        [DataMember]
         string[] includeEdges;
+        [DataMember]
         T[] includeVertexes;
 
+        [DataMember]
         bool[] checkEdges;
+        [DataMember]
         bool[] checkVertexes;
 
         public CheckerInclude(IEnumerable<string> incEdges, IEnumerable<T> incVertexes)

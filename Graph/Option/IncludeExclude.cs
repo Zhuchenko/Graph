@@ -10,7 +10,7 @@ namespace Graph
         T[] includeVertexes;
         string[] excludeEdges;
         T[] excludeVertexes;
-
+        
         CheckerInclude<T> checker;
 
         public IncludeExclude(IEnumerable<string> incEdges, IEnumerable<T> incVertexes, 

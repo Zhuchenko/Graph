@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Graph
 {
+    [DataContract]
     public class Edge<T>: IComparable<Edge<T>> where T: IComparable<T>
     {
+        [DataMember]
         public Vertex<T> Start { get; }
+        [DataMember]
         public Vertex<T> Finish { get; }
+        [DataMember]
         public string Name { get; }
+        [DataMember]
         public int Weight { get; }
 
         public Edge(T start, T finish, string name, int weight)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using Graph.Option;
 
 namespace Graph
 {
@@ -23,7 +24,8 @@ namespace Graph
             Console.Write("Input searching options for vertexes: ");
             string optionsForVertexes = Console.ReadLine();
 
-            var option = DoOptions(optionsForEdges, optionsForVertexes);
+            var option1 = DoOptions(optionsForEdges, optionsForVertexes);
+            var option = new Option<string>(new IOption<string>[] { option1, new MaxLength<string>(5) });
             var bestPathFinder = new BestPathFinder<string>();
             var allPathesFinder = new AllPathesFinder<string>();
 

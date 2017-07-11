@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace Graph
 {
     public class Option<T> : IOption<T> where T : IComparable<T>
