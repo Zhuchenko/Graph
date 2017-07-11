@@ -17,7 +17,7 @@ namespace UnitTests
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 1), Tuple.Create("A", "D", 1),
                 Tuple.Create("B", "A", 1), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) });
             
-            var option =  new Option<string>(new IOption<string>[0]);
+            var option =  new OptionComposite<string>(new IOption<string>[0]);
             
             var expected = new string[][] { 
                 new string[] { "AB", "BA", "AC" }, new string[] { "AB", "BA", "AD", "DC" },
@@ -50,7 +50,7 @@ namespace UnitTests
             var excEdges = new List<string> { "BC" };
             var excVertexes = new List<string>();
             var incexc = new IncludeExclude<string>(incEdges, incVertexes, excEdges, excVertexes);
-            var option = new Option<string>(new IOption<string>[] { incexc, new MaxLength<string>(3) });
+            var option = new OptionComposite<string>(new IOption<string>[] { incexc, new MaxLength<string>(3) });
 
             var finder = new AllPathesFinder<string>();
 
@@ -76,7 +76,7 @@ namespace UnitTests
             var excEdges = new List<string> { "AC" };
             var excVertexes = new List<string> { "D" };
             var incexc = new IncludeExclude<string>(incEdges, incVertexes, excEdges, excVertexes);
-            var option = new Option<string>(new IOption<string>[] { incexc, new MaxLength<string>(1) });
+            var option = new OptionComposite<string>(new IOption<string>[] { incexc, new MaxLength<string>(1) });
 
             var finder = new AllPathesFinder<string>();
             var actual = finder.GirthOfGraph(graph, "A", "C", option);

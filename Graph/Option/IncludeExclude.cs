@@ -4,14 +4,16 @@ using System.Linq;
 
 namespace Graph
 {
-    public class IncludeExclude<T>: IOption<T> where T: IComparable<T>
+    public class IncludeExclude<T>: IOption<T> 
+        where T: IComparable<T>
     {
-        string[] includeEdges;
-        T[] includeVertexes;
-        string[] excludeEdges;
-        T[] excludeVertexes;
+        private readonly string[] includeEdges;
+        private readonly T[] includeVertexes;
+
+        private readonly string[] excludeEdges;
+        private readonly T[] excludeVertexes;
         
-        CheckerInclude<T> checker;
+        private CheckerInclude<T> checker;
 
         public IncludeExclude(IEnumerable<string> incEdges, IEnumerable<T> incVertexes, 
             IEnumerable<string> excEdges, IEnumerable<T> excVertexes)
@@ -22,19 +24,28 @@ namespace Graph
             excludeVertexes = excVertexes.ToArray();
         }
 
+        private bool CheckVertex(T vertex)
+        {
+
+            return excludeVertexes.Contains(vertex);
+        }
+
         public bool CheckEdge(Edge<T> edge)
         {
+
             return !(excludeEdges.Contains(edge.Name) 
-                || excludeVertexes.Contains(edge.Start.Key) 
-                || excludeVertexes.Contains(edge.Finish.Key));
+                || CheckVertex(edge.Start.Key) 
+                || CheckVertex(edge.Finish.Key));
         }
 
         public bool CheckPath(IEnumerable<Edge<T>> path)
         {
             checker = new CheckerInclude<T>(includeEdges, includeVertexes);
             checker.CheckVertex(path.First().Start.Key);
+
             foreach (var edge in path)
                 checker.CheckEdge(edge);
+
             return checker.CheckPath();
         }
     }

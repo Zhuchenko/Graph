@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Graph
 {
-    [DataContract]
-    public class CheckerInclude<T> where T: IComparable<T>
+    public class CheckerInclude<T> 
+        where T: IComparable<T>
     {
-        [DataMember]
-        string[] includeEdges;
-        [DataMember]
-        T[] includeVertexes;
+        private readonly string[] includeEdges;
+        private readonly T[] includeVertexes;
 
-        [DataMember]
-        bool[] checkEdges;
-        [DataMember]
-        bool[] checkVertexes;
+        private bool[] checkEdges;
+        private bool[] checkVertexes;
 
         public CheckerInclude(IEnumerable<string> incEdges, IEnumerable<T> incVertexes)
         {
@@ -43,8 +38,10 @@ namespace Graph
         {
             foreach (bool check in checkVertexes)
                 if (!check) return false;
+
             foreach (bool check in checkEdges)
                 if (!check) return false;
+
             return true;
         }
     }

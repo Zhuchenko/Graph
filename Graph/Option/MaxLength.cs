@@ -4,9 +4,10 @@ using System.Linq;
 
 namespace Graph.Option
 {
-    public class MaxLength<T> : IOption<T> where T : IComparable<T>
+    public class MaxLength<T> : IOption<T> 
+        where T : IComparable<T>
     {
-        int _supremum;
+        private readonly int _supremum;
 
         public MaxLength(int supremum)
         {

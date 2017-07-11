@@ -49,19 +49,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllPathesFinder.cs" />
-    <Compile Include="BestPathFinder.cs" />
+    <Compile Include="Finder\AllPathesFinder.cs" />
+    <Compile Include="Finder\BestPathFinder.cs" />
+    <Compile Include="Finder\IFinder.cs" />
     <Compile Include="Option\CheckerInclude.cs" />
-    <Compile Include="Edge.cs" />
-    <Compile Include="Graph.cs" />
+    <Compile Include="Structures\Edge.cs" />
+    <Compile Include="Structures\Graph.cs" />
     <Compile Include="Option\IncludeExclude.cs" />
     <Compile Include="Option\IOption.cs" />
     <Compile Include="Option\MaxLength.cs" />
     <Compile Include="Option\Option.cs" />
-    <Compile Include="Pair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vertex.cs" />
+    <Compile Include="Structures\Path.cs" />
+    <Compile Include="Structures\Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

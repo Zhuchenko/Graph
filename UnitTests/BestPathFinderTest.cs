@@ -18,7 +18,7 @@ namespace UnitTests
                 Tuple.Create("B", "A", 2), Tuple.Create("B", "C", 4), Tuple.Create("D", "C", 1) }));
 
 
-            var option = new Option<string>(new IOption<string>[0]);
+            var option = new OptionComposite<string>(new IOption<string>[0]);
             var finder = new BestPathFinder<string>();
 
             var expected = new string[] { "AD", "DC" };
@@ -37,7 +37,7 @@ namespace UnitTests
                 Tuple.Create("B", "A", 2), Tuple.Create("B", "C", 4), Tuple.Create("D", "C", 1) }));
 
 
-            var option = new Option<string>(new IOption<string>[0]);
+            var option = new OptionComposite<string>(new IOption<string>[0]);
 
             var finder = new BestPathFinder<string>();
 
@@ -56,7 +56,7 @@ namespace UnitTests
                 Tuple.Create("A", "B", 1), Tuple.Create("A", "C", 3), Tuple.Create("A", "D", 1),
                 Tuple.Create("B", "A", 3), Tuple.Create("B", "C", 1), Tuple.Create("D", "C", 1) }));
             
-            var option = new Option<string>(new IOption<string>[0]);
+            var option = new OptionComposite<string>(new IOption<string>[0]);
 
             var finder = new BestPathFinder<string>();
 
@@ -80,7 +80,7 @@ namespace UnitTests
             var excEdges = new List<string> { "AC" };
             var excVertexes = new List<string>();
             var incexc = new IncludeExclude<string>(incEdges, incVertexes, excEdges, excVertexes);
-            var option = new Option<string>(new IOption<string>[] { incexc, new MaxLength<string>(2) });
+            var option = new OptionComposite<string>(new IOption<string>[] { incexc, new MaxLength<string>(2) });
 
             var finder = new BestPathFinder<string>();
 

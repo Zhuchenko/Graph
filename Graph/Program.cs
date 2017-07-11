@@ -25,14 +25,14 @@ namespace Graph
             string optionsForVertexes = Console.ReadLine();
 
             var option1 = DoOptions(optionsForEdges, optionsForVertexes);
-            var option = new Option<string>(new IOption<string>[] { option1, new MaxLength<string>(5) });
+            var option = new OptionComposite<string>(new IOption<string>[] { option1, new MaxLength<string>(5) });
             var bestPathFinder = new BestPathFinder<string>();
             var allPathesFinder = new AllPathesFinder<string>();
 
-            foreach (var path in allPathesFinder.GirthOfGraph(graph, starting, final, option))
+            foreach (var path in allPathesFinder.Find(graph, starting, final, option))
                 Print(path);
 
-            Print(bestPathFinder.Find(graph, starting, final, option));
+            Print(bestPathFinder.Find(graph, starting, final, option).First());
 
             Console.ReadKey();
         }
