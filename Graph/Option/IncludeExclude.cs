@@ -5,18 +5,18 @@ using System.Linq;
 
 namespace Graph
 {
-    public class IncludeExclude<T>: IOption<T> 
-        where T: IComparable<T>
+    public class IncludeExclude<T> : IOption<T>
+        where T : IComparable<T>
     {
         private readonly string[] includeEdges;
         private readonly T[] includeVertexes;
 
         private readonly string[] excludeEdges;
         private readonly T[] excludeVertexes;
-        
+
         private CheckerInclude<T> checker;
 
-        public IncludeExclude(IEnumerable<string> incEdges, IEnumerable<T> incVertexes, 
+        public IncludeExclude(IEnumerable<string> incEdges, IEnumerable<T> incVertexes,
             IEnumerable<string> excEdges, IEnumerable<T> excVertexes)
         {
             includeEdges = incEdges.ToArray();
@@ -34,8 +34,8 @@ namespace Graph
         public bool CheckEdge(Edge<T> edge)
         {
 
-            return !(excludeEdges.Contains(edge.Name) 
-                || CheckVertex(edge.Start.Key) 
+            return !(excludeEdges.Contains(edge.Name)
+                || CheckVertex(edge.Start.Key)
                 || CheckVertex(edge.Finish.Key));
         }
 

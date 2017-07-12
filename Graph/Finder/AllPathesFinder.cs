@@ -5,16 +5,16 @@ using System.Linq;
 
 namespace Graph
 {
-    public class AllPathesFinder<T>: IFinder<T>
-        where T: IComparable<T>
+    public class AllPathesFinder<T> : IFinder<T>
+        where T : IComparable<T>
     {
         public IEnumerable<Path<T>> Find(Graph<T> graph, T starting, T final, IOption<T> option)
         {
             var queue = new Queue<Path<T>>();
             var firstEdges = FindFirstEdges(graph, starting);
-            
+
             foreach (var edge in firstEdges)
-                queue.Enqueue(new Path<T> (edge));
+                queue.Enqueue(new Path<T>(edge));
 
             while (queue.Count > 0)
             {

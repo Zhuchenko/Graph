@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Graph
 {
-    public class BestPathFinder<T>: IFinder<T>
-        where T: IComparable<T>
+    public class BestPathFinder<T> : IFinder<T>
+        where T : IComparable<T>
     {
         public IEnumerable<Path<T>> Find(Graph<T> graph, T starting, T final, IOption<T> option)
         {
+            var finder = new AllPathesFinder<T>();
             var bestPath = new Path<T>();
             int minWeight = -1;
-            var finder = new AllPathesFinder<T>();
             foreach (var path in finder.Find(graph, starting, final, option))
             {
                 bool completed = true;
@@ -42,7 +42,7 @@ namespace Graph
                 }
             }
 
-            var returnValue = new Path<T>[] 
+            var returnValue = new Path<T>[]
             {
                 bestPath
             };

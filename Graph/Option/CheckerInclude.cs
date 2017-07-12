@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Graph
 {
-    public class CheckerInclude<T> 
-        where T: IComparable<T>
+    public class CheckerInclude<T>
+        where T : IComparable<T>
     {
         private readonly string[] includeEdges;
         private readonly T[] includeVertexes;

@@ -33,7 +33,7 @@ namespace Graph
                 Print(path);
 
             Print(bestPathFinder.Find(graph, starting, final, option).First());
-
+            
             Console.ReadKey();
         }
 

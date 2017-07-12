@@ -8,10 +8,6 @@ namespace Graph.Structures
     public class Path<T>: ICloneable, IEnumerable<Edge<T>>
         where T: IComparable<T>
     {
-        public List<Edge<T>> Edges { get; }
-
-        public int Count { get; private set; }
-
         public Path()
         {
             Edges = new List<Edge<T>>();
@@ -33,6 +29,10 @@ namespace Graph.Structures
             Count = Edges.Count;
         }
 
+        public List<Edge<T>> Edges { get; }
+
+        public int Count { get; private set; }
+        
         public void Add(Edge<T> edge)
         {
             Edges.Add(edge);
