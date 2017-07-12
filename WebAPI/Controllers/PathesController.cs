@@ -17,8 +17,11 @@ namespace WebAPI.Controllers
         public IHttpActionResult Get()
         {
             var input = new Input();
+
             input.Starting = "A";
+
             input.Final = "C";
+
             input.Graph = new Graph<string>(new List<Edge<string>>
             {
                 new Edge<string>("A", "B", "AB", 1),
@@ -28,11 +31,13 @@ namespace WebAPI.Controllers
                 new Edge<string>("B", "C", "BC", 1),
                 new Edge<string>("D", "C", "DC", 1)
             });
+
             input.Options = new Option[]
             {
                 new Option(),
                 new Option()
             };
+
             input.Options[0].type = TypeOfOption.MaxLength;
             input.Options[0].sup = 2;
 
@@ -43,8 +48,8 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("")]
-        public IHttpActionResult Post([FromBody]Input obj)
+        [Route("best")]
+        public IHttpActionResult FindBest([FromBody]Input obj)
         {
             var finder = new BestPathFinder<string>();
 
@@ -52,6 +57,19 @@ namespace WebAPI.Controllers
 
             var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, optionComposite);
            
+            return Ok(bestPath);
+        }
+
+        [HttpPost]
+        [Route("all")]
+        public IHttpActionResult FindAll([FromBody]Input obj)
+        {
+            var finder = new AllPathesFinder<string>();
+
+            var optionComposite = obj.GetOptionComposite();
+
+            var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, optionComposite);
+
             return Ok(bestPath);
         }
     }
