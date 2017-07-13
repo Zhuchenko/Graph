@@ -8,7 +8,7 @@ namespace WebAPI
 {
     public class OptionConverter : JsonConverter
     {
-        protected  IOption<string> Create(Type objectType, JObject jObject)
+        protected IOption<string> Create(Type objectType, JObject jObject)
         {
             if (FieldExists("supremum", jObject))
             {

@@ -14,7 +14,7 @@ namespace Graph
             Edges = new Edge<T>[edges.Count()];
             Array.Copy(edges.ToArray(), Edges, edges.Count());
         }
-        
+
         public Edge<T>[] Edges { get; set; }
 
         public IEnumerable<Edge<T>> FindAllBeginingIn(T vertex)

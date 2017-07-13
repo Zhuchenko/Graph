@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace Graph.Structures
 {
-    public class Path<T> : ICloneable, IEnumerable<Edge<T>>
-        where T : IComparable<T>
+    public class Path<T>: ICloneable, IEnumerable<Edge<T>>
+        where T: IComparable<T>
     {
         public Path()
         {
@@ -32,7 +32,7 @@ namespace Graph.Structures
         public List<Edge<T>> Edges { get; }
 
         public int Count { get; private set; }
-
+        
         public void Add(Edge<T> edge)
         {
             Edges.Add(edge);

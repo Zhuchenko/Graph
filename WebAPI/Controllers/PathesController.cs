@@ -12,13 +12,13 @@ namespace WebAPI.Controllers
         [Route("")]
         public IHttpActionResult Get()
         {
-            var input = new Input()
-            {
-                Starting = "A",
+            var input = new Input();
 
-                Final = "C",
+            input.Starting = "A";
 
-                Graph = new Graph<string>(new List<Edge<string>>
+            input.Final = "C";
+
+            input.Graph = new Graph<string>(new List<Edge<string>>
             {
                 new Edge<string>("A", "B", "AB", 1),
                 new Edge<string>("A", "C", "AC", 3),
@@ -26,14 +26,14 @@ namespace WebAPI.Controllers
                 new Edge<string>("B", "A", "BA", 3),
                 new Edge<string>("B", "C", "BC", 1),
                 new Edge<string>("D", "C", "DC", 1)
-            }),
+            });
 
-                Options = new IOption<string>[]
+            input.Options = new IOption<string>[]
             {
                 new MaxLength<string>(2),
                 new IncludeExclude<string>()
-            }
             };
+            
             ((IncludeExclude<string>)input.Options[1]).ExcludeEdges = new string[] { "AC" };
 
             return Ok(input);
@@ -56,9 +56,9 @@ namespace WebAPI.Controllers
         {
             var finder = new AllPathesFinder<string>();
 
-            var allPathes = finder.Find(obj.Graph, obj.Starting, obj.Final, new OptionComposite<string>(obj.Options));
+            var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, new OptionComposite<string>(obj.Options));
 
-            return Ok(allPathes);
+            return Ok(bestPath);
         }
     }
 }

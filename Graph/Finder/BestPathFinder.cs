@@ -48,7 +48,12 @@ namespace Graph
                 }
             }
 
-            return new[] { bestPath };
+            var returnValue = new Path<T>[]
+            {
+                bestPath
+            };
+
+            return returnValue;
         }
     }
 }
