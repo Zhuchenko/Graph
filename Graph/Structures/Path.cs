@@ -54,6 +54,16 @@ namespace Graph.Structures
             return new Path<T>(Edges.GetRange(0, Count));
         }
 
+        public bool EndsWith(T vertex)
+        {
+            return Last().Finish.Key.CompareTo(vertex) == 0;
+        }
+
+        public bool ContinuesWith(Edge<T> edge)
+        {
+            return Last().Finish.Key.CompareTo(edge.Start.Key) == 0;
+        }
+
         public IEnumerator<Edge<T>> GetEnumerator()
         {
             foreach (var edge in Edges)

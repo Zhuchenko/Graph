@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
         [Route("best")]
         public IHttpActionResult FindBest([FromBody]Input obj)
         {
-            var finder = new BestPathFinder<string>();
+            var finder = new BestPathFinder<string>(new AllPathesFinder<string>());
 
             var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, new OptionComposite<string>(obj.Options));
            
@@ -56,9 +56,9 @@ namespace WebAPI.Controllers
         {
             var finder = new AllPathesFinder<string>();
 
-            var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, new OptionComposite<string>(obj.Options));
+            var allPathes = finder.Find(obj.Graph, obj.Starting, obj.Final, new OptionComposite<string>(obj.Options));
 
-            return Ok(bestPath);
+            return Ok(allPathes);
         }
     }
 }

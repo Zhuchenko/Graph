@@ -14,12 +14,14 @@ namespace Graph
             Edges = new Edge<T>[edges.Count()];
             Array.Copy(edges.ToArray(), Edges, edges.Count());
         }
-<<<<<<< HEAD
 
         public Edge<T>[] Edges { get; set; }
-=======
->>>>>>> 99eae3d6cda43347b3b8f20a08dae5a2ca923f73
-
-        public Edge<T>[] Edges { get; set; }
+        
+        public IEnumerable<Edge<T>> FindAllBeginingIn(T vertex)
+        {
+            return from edge in Edges
+                   where edge.Start.Key.CompareTo(vertex) == 0
+                   select edge;
+        }
     }
 }

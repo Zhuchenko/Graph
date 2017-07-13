@@ -26,7 +26,7 @@ namespace Graph
 
             var option1 = DoOptions(optionsForEdges, optionsForVertexes);
             var option = new OptionComposite<string>(new IOption<string>[] { option1, new MaxLength<string>(5) });
-            var bestPathFinder = new BestPathFinder<string>();
+            var bestPathFinder = new BestPathFinder<string>(new AllPathesFinder<string>());
             var allPathesFinder = new AllPathesFinder<string>();
 
             foreach (var path in allPathesFinder.Find(graph, starting, final, option))

@@ -10,7 +10,7 @@ namespace Graph
         public IEnumerable<Path<T>> Find(Graph<T> graph, T starting, T final, IOption<T> option)
         {
             var queue = new Queue<Path<T>>();
-            var firstEdges = FindFirstEdges(graph, starting);
+            var firstEdges = graph.FindAllBeginingIn(starting);
 
             foreach (var edge in firstEdges)
                 queue.Enqueue(new Path<T>(edge));
@@ -19,7 +19,7 @@ namespace Graph
             {
                 Path<T> currentPath = queue.Dequeue();
 
-                var isCompleted = AreEqual(currentPath.Last().Finish.Key, final);
+                var isCompleted = currentPath.EndsWith(final);
                 var isChecked = option.CheckPath(currentPath);
                 if (isCompleted && isChecked)
                 {
@@ -37,30 +37,13 @@ namespace Graph
             }
         }
 
-        private bool AreAllied(Edge<T> first, Edge<T> second)
-        {
-            return first.Finish.Key.CompareTo(second.Start.Key) == 0;
-        }
-
-        private bool AreEqual(T first, T second)
-        {
-            return first.CompareTo(second) == 0;
-        }
-
-        private IEnumerable<Edge<T>> FindFirstEdges(Graph<T> graph, T starting)
-        {
-            return from edge in graph.Edges
-                   where AreEqual(edge.Start.Key, starting)
-                   select edge;
-        }
-
         private IEnumerable<Edge<T>> FindAllNextEdges(Graph<T> graph, Path<T> currentPath, IOption<T> option)
         {
             var nextEdges = new List<Edge<T>>();
 
             foreach (Edge<T> item in graph.Edges)
             {
-                var isContinuation = AreAllied(currentPath.Last(), item);
+                var isContinuation = currentPath.ContinuesWith(item);
                 var isNotContains = !currentPath.Contains(item);
                 var isChecked = option.CheckEdge(item);
 
