@@ -19,7 +19,7 @@ namespace UnitTests
 
 
             var option = new OptionComposite<string>(new IOption<string>[0]);
-            var finder = new BestPathFinder<string>();
+            var finder = new BestPathFinder<string>(new AllPathesFinder<string>());
 
             var expected = new string[] { "AD", "DC" };
 
@@ -39,7 +39,7 @@ namespace UnitTests
 
             var option = new OptionComposite<string>(new IOption<string>[0]);
 
-            var finder = new BestPathFinder<string>();
+            var finder = new BestPathFinder<string>(new AllPathesFinder<string>());
 
             var expected = new string[] { "AC" };
 
@@ -58,7 +58,7 @@ namespace UnitTests
             
             var option = new OptionComposite<string>(new IOption<string>[0]);
 
-            var finder = new BestPathFinder<string>();
+            var finder = new BestPathFinder<string>(new AllPathesFinder<string>());
 
             var expected = new string[] { "AB", "BC" };
 
@@ -82,7 +82,7 @@ namespace UnitTests
             var incexc = new IncludeExclude<string>(incEdges, incVertexes, excEdges, excVertexes);
             var option = new OptionComposite<string>(new IOption<string>[] { incexc, new MaxLength<string>(2) });
 
-            var finder = new BestPathFinder<string>();
+            var finder = new BestPathFinder<string>(new AllPathesFinder<string>());
 
             var expected = new string[] { "AB", "BC" };
 
