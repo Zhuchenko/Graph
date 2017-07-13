@@ -1,9 +1,5 @@
 ﻿using Graph;
 using System.Web.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using System.IO;
 using System.Collections.Generic;
 using Graph.Option;
 
@@ -32,17 +28,13 @@ namespace WebAPI.Controllers
                 new Edge<string>("D", "C", "DC", 1)
             });
 
-            input.Options = new Option[]
+            input.Options = new IOption<string>[]
             {
-                new Option(),
-                new Option()
+                new MaxLength<string>(2),
+                new IncludeExclude<string>()
             };
-
-            input.Options[0].type = TypeOfOption.MaxLength;
-            input.Options[0].sup = 2;
-
-            input.Options[1].type = TypeOfOption.IncludeExclude;
-            input.Options[1].excludeEdges = new string[] { "AC" };
+            
+            ((IncludeExclude<string>)input.Options[1]).ExcludeEdges = new string[] { "AC" };
 
             return Ok(input);
         }
@@ -53,9 +45,7 @@ namespace WebAPI.Controllers
         {
             var finder = new BestPathFinder<string>();
 
-            var optionComposite = obj.GetOptionComposite();
-
-            var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, optionComposite);
+            var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, new OptionComposite<string>(obj.Options));
            
             return Ok(bestPath);
         }
@@ -66,9 +56,7 @@ namespace WebAPI.Controllers
         {
             var finder = new AllPathesFinder<string>();
 
-            var optionComposite = obj.GetOptionComposite();
-
-            var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, optionComposite);
+            var bestPath = finder.Find(obj.Graph, obj.Starting, obj.Final, new OptionComposite<string>(obj.Options));
 
             return Ok(bestPath);
         }

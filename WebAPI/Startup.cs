@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using WebAPI;
+using System.Collections.Generic;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -43,8 +44,13 @@ namespace WebAPI
                 NullValueHandling = NullValueHandling.Ignore,
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Converters = new List<JsonConverter>
+                {
+                    new OptionConverter()
+                }
             };
+
             settings.Converters.Add(new StringEnumConverter { CamelCaseText = false });
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 

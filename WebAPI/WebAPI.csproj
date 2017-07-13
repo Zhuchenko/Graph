@@ -101,10 +101,10 @@
   <ItemGroup>
     <Compile Include="Controllers\PathesController.cs" />
     <Compile Include="Models\Input.cs" />
-    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\OptionConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Models\TypeOfOption.cs" />
+    <Compile Include="Models\JsonCreationConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Graph\Graph.csproj">
