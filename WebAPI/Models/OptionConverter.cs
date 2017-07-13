@@ -3,12 +3,18 @@ using Graph.Option;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI
 {
-    public class OptionConverter : JsonConverter
+    public class OptionConverter : JsonCreationConverter<IOption<string>>
     {
+<<<<<<< HEAD
         protected IOption<string> Create(Type objectType, JObject jObject)
+=======
+        protected override IOption<string> Create(Type objectType, JObject jObject)
+>>>>>>> 99eae3d6cda43347b3b8f20a08dae5a2ca923f73
         {
             if (FieldExists("supremum", jObject))
             {
@@ -24,32 +30,24 @@ namespace WebAPI
         {
             return jObject[fieldName] != null;
         }
-
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof(IOption<string>).IsAssignableFrom(objectType);
-        }
-
-        public override object ReadJson(JsonReader reader,
-            Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            JObject jObject = JObject.Load(reader);
-
-            IOption<string> target = Create(objectType, jObject);
-
-            serializer.Populate(jObject.CreateReader(), target);
-
-            return target;
-        }
-
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
-
+        
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            JToken t = JToken.FromObject(value);
+
+            if (t.Type != JTokenType.Object)
+            {
+                t.WriteTo(writer);
+            }
+            else
+            {
+                JObject obj = (JObject)t;
+                IList<string> propertyNames = obj.Properties().Select(p => p.Name).ToList();
+
+                obj.AddFirst(new JProperty("Options", new JArray(propertyNames)));
+
+                obj.WriteTo(writer);
+            }
         }
     }
 }
