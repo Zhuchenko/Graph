@@ -8,18 +8,12 @@ namespace Graph
     public class BestPathFinder<T> : IFinder<T>
         where T : IComparable<T>
     {
-        private readonly IFinder<T> _finder;
-
-        public BestPathFinder(IFinder<T> finder)
-        {
-            _finder = finder;
-        }
-
         public IEnumerable<Path<T>> Find(Graph<T> graph, T starting, T final, IOption<T> option)
         {
+            var finder = new AllPathesFinder<T>();
             var bestPath = new Path<T>();
             int minWeight = -1;
-            foreach (var path in _finder.Find(graph, starting, final, option))
+            foreach (var path in finder.Find(graph, starting, final, option))
             {
                 bool completed = true;
                 int currentWeight = 0;
@@ -48,7 +42,12 @@ namespace Graph
                 }
             }
 
-            return new[] { bestPath };
+            var returnValue = new Path<T>[]
+            {
+                bestPath
+            };
+
+            return returnValue;
         }
     }
 }
