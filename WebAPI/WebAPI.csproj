@@ -87,6 +87,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="cytoscape.js" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -96,10 +98,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\cytoscape.js" />
+    <Content Include="Scripts\cytoscape.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\PathesController.cs" />
+    <Compile Include="Models\Edge.cs" />
+    <Compile Include="Models\Graph.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\OptionConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

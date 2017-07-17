@@ -12,31 +12,40 @@ namespace WebAPI.Controllers
         [Route("")]
         public IHttpActionResult Get()
         {
-            var input = new Input();
-
-            input.Starting = "A";
-
-            input.Final = "C";
-
-            input.Graph = new Graph<string>(new List<Edge<string>>
+            var graph = new Models.Graph()
             {
-                new Edge<string>("A", "B", "AB", 1),
-                new Edge<string>("A", "C", "AC", 3),
-                new Edge<string>("A", "D", "AD", 1),
-                new Edge<string>("B", "A", "BA", 3),
-                new Edge<string>("B", "C", "BC", 1),
-                new Edge<string>("D", "C", "DC", 1)
-            });
-
-            input.Options = new IOption<string>[]
-            {
-                new MaxLength<string>(2),
-                new IncludeExclude<string>()
+                Vertexes = new string[] { "A", "B", "C", "D", },
+                Edges = new Models.Edge[]
+                {
+                    new Models.Edge()
+                    {
+                        Source = "A",
+                        Target = "B"
+                    },
+                    new Models.Edge()
+                    {
+                        Source = "A",
+                        Target = "C"
+                    },
+                    new Models.Edge()
+                    {
+                        Source = "A",
+                        Target = "D"
+                    },
+                    new Models.Edge()
+                    {
+                        Source = "B",
+                        Target = "D"
+                    },
+                    new Models.Edge()
+                    {
+                        Source = "D",
+                        Target = "C"
+                    }
+                }
             };
-            
-            ((IncludeExclude<string>)input.Options[1]).ExcludeEdges = new string[] { "AC" };
 
-            return Ok(input);
+            return Ok(graph);
         }
 
         [HttpPost]
