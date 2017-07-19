@@ -1,0 +1,10 @@
+C:\Users\KristinaZ\Documents\Graph\Graph\bin\Debug\Graph.exe.config
+C:\Users\KristinaZ\Documents\Graph\Graph\bin\Debug\Graph.exe
+C:\Users\KristinaZ\Documents\Graph\Graph\bin\Debug\Graph.pdb
+C:\Users\KristinaZ\Documents\Graph\Graph\bin\Debug\Json.dll
+C:\Users\KristinaZ\Documents\Graph\Graph\bin\Debug\Newtonsoft.Json.dll
+C:\Users\KristinaZ\Documents\Graph\Graph\bin\Debug\Json.pdb
+C:\Users\KristinaZ\Documents\Graph\Graph\bin\Debug\Newtonsoft.Json.xml
+C:\Users\KristinaZ\Documents\Graph\Graph\obj\Debug\Graph.csprojResolveAssemblyReference.cache
+C:\Users\KristinaZ\Documents\Graph\Graph\obj\Debug\Graph.exe
+C:\Users\KristinaZ\Documents\Graph\Graph\obj\Debug\Graph.pdb

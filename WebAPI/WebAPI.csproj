@@ -88,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="cytoscape.js" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -98,8 +97,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\code.js" />
     <Content Include="Scripts\cytoscape.js" />
     <Content Include="Scripts\cytoscape.min.js" />
+    <Content Include="style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

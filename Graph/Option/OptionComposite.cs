@@ -10,7 +10,7 @@ namespace Graph
 
         public OptionComposite(IOption<T>[] options)
         {
-            _options = options;
+            _options = (options != null) ? options : new IOption<T>[0];
         }
 
         public bool CheckEdge(Edge<T> edge)

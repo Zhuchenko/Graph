@@ -1,0 +1,17 @@
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\UnitTests.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\UnitTests.pdb
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Graph.exe
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Graph.pdb
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Graph.exe.config
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\KristinaZ\Documents\Graph\UnitTests\obj\Debug\UnitTests.csprojResolveAssemblyReference.cache
+C:\Users\KristinaZ\Documents\Graph\UnitTests\obj\Debug\UnitTests.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\obj\Debug\UnitTests.pdb
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\KristinaZ\Documents\Graph\UnitTests\bin\Debug\Newtonsoft.Json.xml

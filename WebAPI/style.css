@@ -1,0 +1,62 @@
+﻿body {
+    font: 14px helvetica neue, helvetica, arial, sans-serif;
+}
+
+#cy {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+}
+
+#best {
+    height: 3%;
+    width: 5%;
+    position: absolute;
+    z-index: 1;
+    left: 100px;
+    top: 70px;
+}
+
+#all {
+    height: 3%;
+    width: 5%;
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    top: 70px;
+}
+
+#next {
+    height: 3%;
+    width: 5%;
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    top: 100px;
+}
+
+#starting {
+    height: 2%;
+    width: 5%;
+    position: absolute;
+    z-index: 1;
+    left: 70px;
+    top: 10px;
+}
+
+#final {
+    height: 2%;
+    width: 5%;
+    position: absolute;
+    z-index: 1;
+    left: 70px;
+    top: 40px;
+}
+
+.hide {
+    display: none;
+}
+

@@ -5,7 +5,7 @@ namespace WebAPI
 {
     public class Input
     {
-        public Graph<string> Graph { get; set; }
+        public Edge<string>[] Graph { get; set; }
 
         public string Starting { get; set; }
 
