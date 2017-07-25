@@ -15,7 +15,12 @@
         <p>Final: </p>
         <input type="text" size="10" maxlength="15" id="starting" />
         <input type="text" size="10" maxlength="15" id="final" />
-        <input type="button" onclick="showNext()" value="Next" id="next" class="hide" />
+        <input type="button" onclick="standartBfs()" value="BFS" id="stBfs" />
+        <input type="button" onclick="standartDfs()" value="DFS" id="stDfs" />
+        <input type="button" onclick="standartDijkstra()" value="Dijkstra" id="stDijkstra" />
+        <input type="button" onclick="standartStar()" value="aStar" id="star" />
+        <input type="button" onclick="cleanUp()" value="Clear" id="cl" />
+
     </form>
         <div id="cy"></div>
     <script src="/Scripts/code.js"></script>

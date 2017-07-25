@@ -1,35 +1,39 @@
 ﻿var cy = null;
-var response = null;
-var best = null;
-var all = null;
-var count;
+var graph = null;
 
-var url = "http://localhost:52446/api/pathes/";
-var request = new XMLHttpRequest();
-request.open("GET", url);
-request.onreadystatechange = function () {
-    if (request.readyState === 4 && request.status === 200) {
-        response = JSON.parse(request.responseText);
-        draw();
-    }
-};
-request.send();
+(function() {
+    let url = "http://localhost:52446/api/pathes/";
+
+    let request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            graph = JSON.parse(request.responseText);
+            draw();
+        }
+    };
+
+    request.send();
+}) ();
 
 function draw() {
-    var _nodes = new Array(response.vertexes.length);
-    for (var i = 0; i < _nodes.length; i++) {
+    let _nodes = new Array(graph.vertexes.length);
+
+    for (let i = 0, l = _nodes.length; i < l; i++) {
         _nodes[i] = {
-            data: { id: response.vertexes[i] }
+            data: { id: graph.vertexes[i] }
         };
     }
-    var _edges = new Array(response.edges.length);
-    for (var j = 0; j < _edges.length; j++) {
-        _edges[j] = {
+
+    let _edges = new Array(graph.edges.length);
+
+    for (let i = 0, l = _edges.length; i < l; i++) {
+        _edges[i] = {
             data: {
-                id: response.edges[j].id,
-                source: response.edges[j].source,
-                target: response.edges[j].target,
-                weight: response.edges[j].weight
+                id: graph.edges[i].id,
+                source: graph.edges[i].source,
+                target: graph.edges[i].target,
+                weight: graph.edges[i].weight
             }
         };
     }
@@ -52,6 +56,14 @@ function draw() {
                 'line-color': '#ddd',
                 'target-arrow-color': '#ddd',
                 'label': 'data(weight)'
+            })
+            .selector('.highlighted')
+            .css({
+                'background-color': '#61bffc',
+                'line-color': '#61bffc',
+                'target-arrow-color': '#61bffc',
+                'transition-property': 'background-color, line-color, target-arrow-color',
+                'transition-duration': '0.5s'
             }),
 
         elements: {
@@ -65,111 +77,176 @@ function draw() {
     });
 }
 
-function findBest () {
-    var xhr = new XMLHttpRequest();
+function findBest() {
+    let url = "http://localhost:52446/api/pathes/best/";
+    postRequest(url, clearAndAnimate);
+}
 
-    var body =
-        {
-            graph: new Array(response.edges.length),
-            starting: document.getElementById('starting').value,
-            final: document.getElementById('final').value
-        };
-    for (var i = 0; i < body.graph.length; i++) {
-        body.graph[i] = {
-            name: response.edges[i].id,
-            start: {
-                key: response.edges[i].source
-            },
-            finish: {
-                key: response.edges[i].target
-            },
-            weight: response.edges[i].weight
-        };
-    }
+function findAll() {
+    let url = "http://localhost:52446/api/pathes/all/";
+    postRequest(url, showListOfAll)
+}
 
-    xhr.open("POST", "http://localhost:52446/api/pathes/best/");
-    xhr.setRequestHeader('Content-Type', 'application/json');
+function postRequest(url, doAfter)
+{
+    let request = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
+    request.open("POST", url);
+    request.setRequestHeader('Content-Type', 'application/json');
+
+    request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
-            best = JSON.parse(xhr.responseText)[0];
-            showBest();
+            response = JSON.parse(request.responseText);
+            doAfter(response);
         }
     };
 
-    xhr.send(JSON.stringify(body));
+    let body = getBody();
+
+    request.send(JSON.stringify(body));
 }
 
-function showBest () {
-    cy.edges().animate({
-        style: { lineColor: '#ddd' }
-    });
-    
-    for (var i = 0; i < best.length; i++) {
-        var param = "[id = " + "'" + best[i].name + "'" + "]";
-        cy.edges(param).animate({
-            style: { lineColor: 'blue' }
-        });
-    }
-}
-
-function findAll () {
-    var xhr = new XMLHttpRequest();
-
-    var body =
+function getBody() {
+    let body =
         {
-            graph: new Array(response.edges.length),
+            graph: new Array(graph.edges.length),
             starting: document.getElementById('starting').value,
             final: document.getElementById('final').value
         };
-    for (var i = 0; i < body.graph.length; i++) {
+
+    for (let i = 0, l = body.graph.length; i < l; i++) {
         body.graph[i] = {
-            name: response.edges[i].id,
+            name: graph.edges[i].id,
             start: {
-                key: response.edges[i].source
+                key: graph.edges[i].source
             },
             finish: {
-                key: response.edges[i].target
+                key: graph.edges[i].target
             },
-            weight: response.edges[i].weight
+            weight: graph.edges[i].weight
         };
     }
-    xhr.open("POST", "http://localhost:52446/api/pathes/all/");
-    xhr.setRequestHeader('Content-Type', 'application/json');
 
-    xhr.onreadystatechange = function () {
-        if (request.readyState === 4 && request.status === 200) {
-            all = JSON.parse(xhr.responseText);
-            count = 0;
-            document.getElementById('next').className = "";
-            showNext();
+    return body;
+}
+
+function clearAndAnimate(response) {
+    cleanUp();
+
+    animatePathById(response[0]);
+}
+
+function showListOfAll(all) {
+    cleanUp();
+
+    let list = document.createElement('select');
+    list.id = 'select';
+    list.size = 10;
+    list.style.cssText = "position:fixed; color: black; left: 10px; top: 250px";
+    list.onchange = function () {
+        showPathByClick(all[this.selectedIndex]);
+    }
+
+    for (let i = 0, l = all.length; i < l; i++) {
+        let text = all[i][0].start.key;
+        for (let j = 0; j < all[i].length; j++) {
+            text += '-' + all[i][j].finish.key;
         }
-    };
+        let item = document.createElement('option');
+        item.innerText = text;
+        list.appendChild(item);
+    }
 
-    xhr.send(JSON.stringify(body));
+    document.body.appendChild(list);
 }
 
-function showNext() {
-    if (!all || all.length === count) {
-        document.getElementById('next').className = "hide";
-        return;
-    }
-    cy.edges().animate({
-        style: { lineColor: '#ddd' }
-    });
-    for (var i = 0; i < all[count].length; i++) {
-        var param = "[id = " + "'" + all[count][i].name + "'" + "]";
-        var ani = function (p) {
-            return function ()
-            { animate(p); };
-        };
-        setTimeout(ani(param), i*1000);
-    }
-    count++;
+function showPathByClick(path) {
+    clearGraph();
+
+    animatePathById(path);
 }
 
-function animate(str) {
-    cy.edges(str).animate({
-        style: { lineColor: 'blue' }
-    });
+function animatePathById(path) {
+    for (let i = 0, l = path.length; i < l; i++) {
+        let element = cy.getElementById(path[i].name);
+
+        setTimeout(function (e) {
+            animate(e);
+        }, i * 1000, element);
+    }
+}
+
+function animatePathByIndex(path) {
+    for (let i = 0, l = path.length; i < l; i++) {
+
+        setTimeout(function (e) {
+            animate(e);
+        }, i * 1000, path[i]);
+
+    }
+}
+
+function animate(element) {
+    element.addClass('highlighted');
+}
+
+function standartBfs() {
+    cleanUp();
+
+    let root = '#' + document.getElementById('starting').value;
+    let bfs = cy.elements().bfs(root, function () { }, true);
+
+    animatePathByIndex(bfs.path);
+}
+
+function standartDfs() {
+    cleanUp();
+
+    let root = '#' + document.getElementById('starting').value;
+    let dfs = cy.elements().dfs(root, function () { }, true);
+
+    animatePathByIndex(dfs.path);
+}
+
+function standartDijkstra() {
+    cleanUp();
+
+    let root = '#' + document.getElementById('starting').value;
+
+    let _dijkstra = cy.elements().dijkstra(root, function () {
+        return this.data('weight');
+    }, true);
+
+    let goal = '#' + document.getElementById('final').value;
+    let pathToFinal = _dijkstra.pathTo(cy.$(goal));
+
+    animatePathByIndex(pathToFinal);
+}
+
+function standartStar() {
+    cleanUp();
+
+    let _root = '#' + document.getElementById('starting').value;
+    let _goal = '#' + document.getElementById('final').value;
+
+    let aStar = cy.elements().aStar({ root: _root, goal: _goal });
+
+    animatePathByIndex(aStar.path);
+}
+
+function clearGraph() {
+    for (let i = 0, l = cy.elements().length; i < l; i++) {
+        cy.elements()[i].removeClass('highlighted');
+    }
+}
+
+function clearList() {
+    let child = document.getElementById('select');
+    if (child)
+        document.body.removeChild(child);
+}
+
+function cleanUp() {
+    clearGraph();
+    clearList();
 }

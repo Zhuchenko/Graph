@@ -11,37 +11,73 @@
     top: 0;
 }
 
+#cl {
+    height: 3%;
+    width: 5%;
+    position: fixed;
+    z-index: 1;
+    left: 10px;
+    bottom: 10px;
+}
+
 #best {
     height: 3%;
     width: 5%;
-    position: absolute;
+    position: fixed;
     z-index: 1;
-    left: 100px;
-    top: 70px;
+    left: 10px;
+    top: 190px;
 }
 
 #all {
     height: 3%;
     width: 5%;
-    position: absolute;
+    position: fixed;
+    z-index: 1;
+    left: 10px;
+    top: 220px;
+}
+
+#stBfs {
+    height: 3%;
+    width: 5%;
+    position: fixed;
     z-index: 1;
     left: 10px;
     top: 70px;
 }
 
-#next {
+#stDfs {
     height: 3%;
     width: 5%;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     left: 10px;
     top: 100px;
 }
 
+#stDijkstra {
+    height: 3%;
+    width: 5%;
+    position: fixed;
+    z-index: 1;
+    left: 10px;
+    top: 130px;
+}
+
+#star {
+    height: 3%;
+    width: 5%;
+    position: fixed;
+    z-index: 1;
+    left: 10px;
+    top: 160px;
+}
+
 #starting {
     height: 2%;
     width: 5%;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     left: 70px;
     top: 10px;
@@ -50,7 +86,7 @@
 #final {
     height: 2%;
     width: 5%;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     left: 70px;
     top: 40px;
